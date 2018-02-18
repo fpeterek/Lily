@@ -14,7 +14,7 @@
 
 namespace Lily {
     
-    std::vector<std::string> files();
+    std::vector<std::string> & files();
     
     bool isImported(const std::string & filename);
     

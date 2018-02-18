@@ -29,15 +29,91 @@ void Tokenizer::openFile(const std::string & filename) {
     
 }
 
+token Tokenizer::number() {
+    
+    token t;
+    
+    t.character = (uint32_t)iter + 1;
+    t.line = lineNumber;
+    
+    const size_t lineLength = line.length();
+    
+    bool decimalPointFound = false;
+    
+    while (iter < lineLength) {
+        
+        if (isdigit(line[iter])) {
+            
+            t.value += std::string(1, line[iter]);
+            
+        } else if (line[iter] == '.' and not decimalPointFound) {
+            
+            decimalPointFound = true;
+            t.value += ".";
+            
+        } else {
+            
+            break;
+            
+        }
+        
+        ++iter;
+        
+    }
+    
+    return t;
+    
+}
+
+token Tokenizer::identifier() {
+    
+    token t;
+    
+    t.character = (uint32_t)iter + 1;
+    t.line = lineNumber;
+    
+    const size_t lineLength = line.length();
+    
+    while (iter < lineLength) {
+        
+        if (isalnum(line[iter]) or line[iter] == '_' or line[iter] == '$' or line[iter] == '\'') {
+            
+            t.value += std::string(1, line[iter]);
+            
+        } else {
+            
+            break;
+            
+        }
+        
+        ++iter;
+        
+    }
+    
+    return t;
+    
+}
+
 std::vector<token> Tokenizer::tokenizeLine() {
     
     std::vector<token> tokens;
     
     const size_t lineLength = line.length();
     iter = 0;
+    ++lineNumber;
     
     while (iter < lineLength) {
         
+        if (isspace(line[iter])) {
+            ++iter;
+            continue;
+        }
+        else if (isdigit(line[iter])) {
+            tokens.emplace_back(number());
+        }
+        else if (isalpha(line[iter])) {
+            tokens.emplace_back(identifier());
+        }
         
         
     }

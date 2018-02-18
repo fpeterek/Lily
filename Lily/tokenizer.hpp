@@ -26,12 +26,15 @@ namespace Lily {
         std::string line;
         std::string tok;
         
-        uint32_t lineNumber, character;
+        uint32_t lineNumber = 0;
         uint32_t file;
         
-        size_t iter;
+        size_t iter = 0;
         
         void openFile(const std::string & filename);
+        
+        token number();
+        token identifier();
         
         std::vector<token> tokenizeLine();
         

@@ -12,7 +12,7 @@ using namespace Lily;
 
 std::vector<std::string> _files;
 
-std::vector<std::string> Lily::files() {
+std::vector<std::string> & Lily::files() {
     
     return _files;
     
