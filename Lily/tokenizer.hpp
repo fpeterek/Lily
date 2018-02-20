@@ -17,6 +17,7 @@
 
 #include "token.hpp"
 #include "exceptions.hpp"
+#include "contains.hpp"
 
 namespace Lily {
     
@@ -31,10 +32,15 @@ namespace Lily {
         
         size_t iter = 0;
         
+        bool isOperatorChar(char c);
+        
         void openFile(const std::string & filename);
         
         token number();
         token identifier();
+        token oper();
+        token specialChar();
+        token string();
         
         std::vector<token> tokenizeLine();
         

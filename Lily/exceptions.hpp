@@ -27,12 +27,20 @@ namespace Lily {
         
     };
     
-    class error_opening_file : lily_error_1param {
+    class error_opening_file : public lily_error_1param {
       
         static std::string message;
     public:
         error_opening_file(const std::string & filename);
         
+    };
+    
+    class missing_token : public lily_error_1param {
+        
+        static std::string message;
+    public:
+        missing_token(const std::string & token);
+        missing_token(char token);
     };
     
 }

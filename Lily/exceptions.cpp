@@ -17,3 +17,8 @@ lily_error_1param::lily_error_1param(const std::string & message,
 
 std::string error_opening_file::message = "Error opening file ";
 error_opening_file::error_opening_file(const std::string & filename) : lily_error_1param(message, filename) { }
+
+
+std::string missing_token::message = "Missing token: ";
+missing_token::missing_token(const std::string & token) : lily_error_1param(message, token) { }
+missing_token::missing_token(char token) : lily_error_1param(message, std::string(1, token)) { }

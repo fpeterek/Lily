@@ -11,10 +11,16 @@
 
 #include <string>
 #include <vector>
+#include <array>
+
+#include "contains.hpp"
 
 namespace Lily {
     
     std::vector<std::string> & files();
+    
+    std::array<char, 12> & operatorChars();
+    std::array<char, 9> & specialChars();
     
     bool isImported(const std::string & filename);
     

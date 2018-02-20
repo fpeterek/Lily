@@ -18,14 +18,20 @@ std::vector<std::string> & Lily::files() {
     
 }
 
+std::array<char, 12> _operatorChars = { '+', '-', '*', '/', '&', '|', '>', '<', '~', '=', '!', '^' };
+
+std::array<char, 12> & Lily::operatorChars() {
+    return _operatorChars;
+}
+
+std::array<char, 9> _specialChars = { '{', '}', '(', ')', '[', ']', '.', ',', ':' };
+
+std::array<char, 9> & Lily::specialChars() {
+    return _specialChars;
+}
+
 bool Lily::isImported(const std::string & filename) {
     
-    for (auto & i : _files) {
-        if (filename == i) {
-            return true;
-        }
-    }
-    
-    return false;
+    return contains(_files, filename);
     
 }

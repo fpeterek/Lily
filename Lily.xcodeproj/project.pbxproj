@@ -27,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E0C8019203C8EF10025016E /* contains.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = contains.hpp; sourceTree = "<group>"; };
 		4EF6A8202038BB99001D7FFF /* Lily */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lily; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EF6A8232038BB99001D7FFF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4EF6A82A2038BBB9001D7FFF /* tokenizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tokenizer.cpp; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 				4EF6A8232038BB99001D7FFF /* main.cpp */,
 				4EF6A8302038BD19001D7FFF /* lily.cpp */,
 				4EF6A8312038BD19001D7FFF /* lily.hpp */,
+				4E0C8019203C8EF10025016E /* contains.hpp */,
 				4EF6A8332038C184001D7FFF /* exceptions.cpp */,
 				4EF6A8342038C184001D7FFF /* exceptions.hpp */,
 				4EF6A82A2038BBB9001D7FFF /* tokenizer.cpp */,

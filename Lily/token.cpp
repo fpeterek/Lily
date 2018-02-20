@@ -7,3 +7,16 @@
 //
 
 #include "token.hpp"
+
+using namespace Lily;
+
+token & token::operator=(const token & t) {
+    
+    value = t.value;
+    character = t.character;
+    line = t.line;
+    file = t.file;
+    
+    return *this;
+    
+}

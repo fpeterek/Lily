@@ -8,6 +8,7 @@
 
 #include "tokenizer.hpp"
 
+
 using namespace Lily;
 
 void Tokenizer::openFile(const std::string & filename) {
@@ -26,6 +27,12 @@ void Tokenizer::openFile(const std::string & filename) {
     if (not stream) {
         throw error_opening_file(filename);
     }
+    
+}
+
+bool Tokenizer::isOperatorChar(char c) {
+    
+    return contains(operatorChars(), c);
     
 }
 
@@ -94,6 +101,96 @@ token Tokenizer::identifier() {
     
 }
 
+token Tokenizer::oper() {
+    
+    token t;
+    
+    t.character = (uint32_t)iter + 1;
+    t.line = lineNumber;
+    
+    const size_t lineLength = line.length();
+    
+    while (iter < lineLength) {
+        
+        if (isOperatorChar(line[iter])) {
+            
+            t.value += std::string(1, line[iter]);
+            
+        } else {
+            
+            break;
+            
+        }
+        
+        ++iter;
+        
+    }
+    
+    return t;
+    
+}
+
+token Tokenizer::specialChar() {
+    
+    token t;
+    
+    t.character = (uint32_t)iter + 1;
+    t.line = lineNumber;
+    
+    t.value = std::string(1, line[iter]);
+    
+    ++iter;
+    
+    return t;
+    
+}
+
+token Tokenizer::string() {
+    
+    token t;
+    
+    t.character = (uint32_t)iter + 1;
+    t.line = lineNumber;
+    
+    const size_t lineLength = line.length();
+    
+    bool isEscape = false;
+    
+    
+    while ( line[iter] != '"' or isEscape ) {
+        
+        if ( line[iter] == '\\' ) {
+            
+            isEscape = not isEscape;
+            
+            t.value += "\\";
+            ++iter;
+            if (iter >= lineLength) {
+                throw missing_token('"');
+            }
+            
+        } else {
+            
+            isEscape = false;
+            
+            t.value += std::string(1, line[iter]); /* std::string constructor(repeat: int, character: char) */
+            ++iter;
+            if (iter >= lineLength) {
+                throw missing_token('"');
+                
+            }
+            
+        }
+        
+    }
+    
+    ++iter; /* Last delimiter character */
+    t.value += "\"";
+    
+    return t;
+    
+}
+
 std::vector<token> Tokenizer::tokenizeLine() {
     
     std::vector<token> tokens;
@@ -111,10 +208,18 @@ std::vector<token> Tokenizer::tokenizeLine() {
         else if (isdigit(line[iter])) {
             tokens.emplace_back(number());
         }
-        else if (isalpha(line[iter])) {
+        else if (isalpha(line[iter]) or line[iter] == '_' or line[iter] == '$') {
             tokens.emplace_back(identifier());
         }
-        
+        else if (isOperatorChar(line[iter])) {
+            tokens.emplace_back(oper());
+        }
+        else if (contains(specialChars(), line[iter])) {
+            tokens.emplace_back(specialChar());
+        }
+        else if (line[iter] == '"') {
+            tokens.emplace_back(string());
+        }
         
     }
     

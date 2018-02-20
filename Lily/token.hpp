@@ -20,6 +20,8 @@ namespace Lily {
         uint32_t file;
         uint32_t line, character;
         
+        token & operator=(const token & t);
+        
     };
     
 }
