@@ -43,6 +43,14 @@ namespace Lily {
         missing_token(char token);
     };
     
+    class invalid_token : public lily_error_1param {
+        
+        static std::string message;
+    public:
+        invalid_token(const std::string & token);
+        invalid_token(char token);
+    };
+    
 }
 
 #endif /* exceptions_hpp */

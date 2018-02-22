@@ -68,6 +68,11 @@ token Tokenizer::number() {
         
     }
     
+    if (t.value.back() == '.') {
+        t.value.pop_back();
+        --iter;
+    }
+    
     return t;
     
 }
@@ -149,8 +154,10 @@ token Tokenizer::string() {
     
     token t;
     
-    t.character = (uint32_t)iter + 1;
+    t.character = (uint32_t)++iter;
     t.line = lineNumber;
+    
+    t.value = "\"";
     
     const size_t lineLength = line.length();
     
@@ -164,22 +171,18 @@ token Tokenizer::string() {
             isEscape = not isEscape;
             
             t.value += "\\";
-            ++iter;
-            if (iter >= lineLength) {
-                throw missing_token('"');
-            }
             
         } else {
             
             isEscape = false;
             
             t.value += std::string(1, line[iter]); /* std::string constructor(repeat: int, character: char) */
-            ++iter;
-            if (iter >= lineLength) {
-                throw missing_token('"');
-                
-            }
             
+        }
+        
+        ++iter;
+        if (iter >= lineLength) {
+            throw missing_token('"');
         }
         
     }
@@ -220,6 +223,9 @@ std::vector<token> Tokenizer::tokenizeLine() {
         else if (line[iter] == '"') {
             tokens.emplace_back(string());
         }
+        else {
+            throw invalid_token(line[iter]);
+        }
         
     }
     
@@ -237,7 +243,7 @@ std::vector<token> Tokenizer::tokenize() {
         
         std::vector<token> tokLine = tokenizeLine();
         
-        tokens.emplace(tokens.end(), tokLine.begin(), tokLine.end());
+        tokens.insert(tokens.end(), tokLine.begin(), tokLine.end());
         
     }
     

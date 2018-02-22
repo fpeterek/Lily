@@ -22,3 +22,8 @@ error_opening_file::error_opening_file(const std::string & filename) : lily_erro
 std::string missing_token::message = "Missing token: ";
 missing_token::missing_token(const std::string & token) : lily_error_1param(message, token) { }
 missing_token::missing_token(char token) : lily_error_1param(message, std::string(1, token)) { }
+
+
+std::string invalid_token::message = "Invalid token: ";
+invalid_token::invalid_token(const std::string & token) : lily_error_1param(message, token) { }
+invalid_token::invalid_token(char token) : lily_error_1param(message, std::string(1, token)) { }

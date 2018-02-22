@@ -20,3 +20,9 @@ token & token::operator=(const token & t) {
     return *this;
     
 }
+
+std::ostream & Lily::operator<< (std::ostream & os, const token & t) {
+    
+    return os << t.value << " [line: " << t.line << ", character: " << t.character << ", file: " << t.file << "]";
+    
+}

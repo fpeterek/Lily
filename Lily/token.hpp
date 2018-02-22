@@ -10,6 +10,7 @@
 #define token_hpp
 
 #include <string>
+#include <ostream>
 
 namespace Lily {
     
@@ -23,6 +24,8 @@ namespace Lily {
         token & operator=(const token & t);
         
     };
+    
+    std::ostream & operator<< (std::ostream & os, const token & t);
     
 }
 

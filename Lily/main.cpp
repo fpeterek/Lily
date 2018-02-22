@@ -8,8 +8,28 @@
 
 #include <iostream>
 
+#include "tokenizer.hpp"
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
+    
     std::cout << "Hello, Lily!\n";
-    return 0;
+    
+    Lily::Tokenizer t;
+    
+    try {
+        
+        std::vector<Lily::token> tokens = t.tokenize("lily.ll");
+        
+        for (auto & i : tokens) {
+            std::cout << i << std::endl;
+        }
+        
+    } catch (const std::runtime_error & e) {
+        
+        std::cout << e.what() << std::endl;
+        
+    }
+    
+    
+    
 }
