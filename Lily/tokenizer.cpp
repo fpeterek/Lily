@@ -36,12 +36,21 @@ bool Tokenizer::isOperatorChar(char c) {
     
 }
 
-token Tokenizer::number() {
+token Tokenizer::initToken() {
     
     token t;
     
     t.character = (uint32_t)iter + 1;
     t.line = lineNumber;
+    t.file = file;
+    
+    return t;
+    
+}
+
+token Tokenizer::number() {
+    
+    token t(initToken());
     
     const size_t lineLength = line.length();
     
@@ -79,10 +88,7 @@ token Tokenizer::number() {
 
 token Tokenizer::identifier() {
     
-    token t;
-    
-    t.character = (uint32_t)iter + 1;
-    t.line = lineNumber;
+    token t(initToken());
     
     const size_t lineLength = line.length();
     
@@ -108,10 +114,7 @@ token Tokenizer::identifier() {
 
 token Tokenizer::oper() {
     
-    token t;
-    
-    t.character = (uint32_t)iter + 1;
-    t.line = lineNumber;
+    token t(initToken());
     
     const size_t lineLength = line.length();
     
@@ -137,10 +140,7 @@ token Tokenizer::oper() {
 
 token Tokenizer::specialChar() {
     
-    token t;
-    
-    t.character = (uint32_t)iter + 1;
-    t.line = lineNumber;
+    token t(initToken());
     
     t.value = std::string(1, line[iter]);
     
@@ -152,10 +152,9 @@ token Tokenizer::specialChar() {
 
 token Tokenizer::string() {
     
-    token t;
+    token t(initToken());
     
-    t.character = (uint32_t)++iter;
-    t.line = lineNumber;
+    ++iter;
     
     t.value = "\"";
     

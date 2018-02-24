@@ -42,6 +42,8 @@ namespace Lily {
         token specialChar();
         token string();
         
+        token initToken();
+        
         std::vector<token> tokenizeLine();
         
         std::vector<token> tokenize();
