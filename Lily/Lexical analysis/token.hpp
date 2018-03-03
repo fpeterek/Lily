@@ -14,6 +14,17 @@
 
 namespace Lily {
     
+    enum TokenType {
+      
+        IntLiteral,
+        FloatLiteral,
+        StringLiteral,
+        Operator,
+        Identifier,
+        Keyword
+        
+    };
+    
     struct token {
         
         std::string value;

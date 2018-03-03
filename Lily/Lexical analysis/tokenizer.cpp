@@ -217,7 +217,12 @@ std::vector<token> Tokenizer::tokenizeLine() {
             tokens.emplace_back(oper());
         }
         else if (contains(specialChars(), line[iter])) {
-            tokens.emplace_back(specialChar());
+            token t = specialChar();
+            if (tokens.size() and (tokens.back().value[0] & t.value[0]) == '.') {
+                tokens.back().value += ".";
+            } else {
+                tokens.emplace_back(t);
+            }
         }
         else if (line[iter] == '"') {
             tokens.emplace_back(string());
