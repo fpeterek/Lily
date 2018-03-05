@@ -51,6 +51,7 @@ token Tokenizer::initToken() {
 token Tokenizer::number() {
     
     token t(initToken());
+    t.type = TokenType::IntLiteral;
     
     const size_t lineLength = line.length();
     
@@ -65,6 +66,7 @@ token Tokenizer::number() {
         } else if (line[iter] == '.' and not decimalPointFound) {
             
             decimalPointFound = true;
+            t.type = TokenType::FloatLiteral;
             t.value += ".";
             
         } else {
@@ -79,6 +81,7 @@ token Tokenizer::number() {
     
     if (t.value.back() == '.') {
         t.value.pop_back();
+        t.type = TokenType::IntLiteral;
         --iter;
     }
     
@@ -86,9 +89,19 @@ token Tokenizer::number() {
     
 }
 
+bool isOperator(token & t) {
+    return contains(operators(), t.value);
+}
+
+bool isKeyword(token & t) {
+    return contains(keywords(), t.value);
+}
+
 token Tokenizer::identifier() {
     
     token t(initToken());
+    
+    t.type = TokenType::Identifier;
     
     const size_t lineLength = line.length();
     
@@ -108,6 +121,12 @@ token Tokenizer::identifier() {
         
     }
     
+    if (isOperator(t)) {
+        t.type = TokenType::Operator;
+    } else if (isKeyword(t)) {
+        t.type = TokenType::Keyword;
+    }
+    
     return t;
     
 }
@@ -115,6 +134,7 @@ token Tokenizer::identifier() {
 token Tokenizer::oper() {
     
     token t(initToken());
+    t.type = TokenType::Operator;
     
     const size_t lineLength = line.length();
     
@@ -138,11 +158,41 @@ token Tokenizer::oper() {
     
 }
 
+TokenType specialCharType(char c) {
+    
+    switch (c) {
+            
+        case '[':
+            return TokenType::OpeningBracket;
+        case ']':
+            return TokenType::ClosingBracket;
+        case '{':
+            return TokenType::OpeningBrace;
+        case '}':
+            return TokenType::ClosingBrace;
+        case '(':
+            return TokenType::OpeningParen;
+        case ')':
+            return TokenType::ClosingParen;
+        case ':':
+            return TokenType::Colon;
+        case ',':
+            return TokenType::Separator;
+        case '.':
+            return TokenType::Operator;
+            
+    }
+    
+    return TokenType::None;
+    
+}
+
 token Tokenizer::specialChar() {
     
     token t(initToken());
     
     t.value = std::string(1, line[iter]);
+    t.type = specialCharType(line[iter]);
     
     ++iter;
     
@@ -153,6 +203,7 @@ token Tokenizer::specialChar() {
 token Tokenizer::string() {
     
     token t(initToken());
+    t.type = TokenType::StringLiteral;
     
     ++iter;
     
@@ -220,6 +271,7 @@ std::vector<token> Tokenizer::tokenizeLine() {
             token t = specialChar();
             if (tokens.size() and (tokens.back().value[0] & t.value[0]) == '.') {
                 tokens.back().value += ".";
+                tokens.back().type = TokenType::Operator;
             } else {
                 tokens.emplace_back(t);
             }

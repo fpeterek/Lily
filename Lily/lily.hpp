@@ -19,8 +19,11 @@ namespace Lily {
     
     std::vector<std::string> & files();
     
-    std::array<char, 12> & operatorChars();
+    std::array<char, 13> & operatorChars();
     std::array<char, 9> & specialChars();
+    
+    std::array<std::string, 5> & operators();
+    std::array<std::string, 11> & keywords();
     
     bool isImported(const std::string & filename);
     

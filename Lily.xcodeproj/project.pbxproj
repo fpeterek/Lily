@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E1724112041A88100160483 /* lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E17240F2041A88100160483 /* lexer.cpp */; };
 		4EF6A8242038BB99001D7FFF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EF6A8232038BB99001D7FFF /* main.cpp */; };
 		4EF6A82C2038BBB9001D7FFF /* tokenizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EF6A82A2038BBB9001D7FFF /* tokenizer.cpp */; };
 		4EF6A82F2038BBDF001D7FFF /* token.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EF6A82D2038BBDF001D7FFF /* token.cpp */; };
@@ -29,8 +28,6 @@
 
 /* Begin PBXFileReference section */
 		4E0C8019203C8EF10025016E /* contains.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = contains.hpp; sourceTree = "<group>"; };
-		4E17240F2041A88100160483 /* lexer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lexer.cpp; sourceTree = "<group>"; };
-		4E1724102041A88100160483 /* lexer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lexer.hpp; sourceTree = "<group>"; };
 		4EF6A8202038BB99001D7FFF /* Lily */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lily; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EF6A8232038BB99001D7FFF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4EF6A82A2038BBB9001D7FFF /* tokenizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tokenizer.cpp; sourceTree = "<group>"; };
@@ -59,8 +56,6 @@
 			children = (
 				4EF6A82A2038BBB9001D7FFF /* tokenizer.cpp */,
 				4EF6A82B2038BBB9001D7FFF /* tokenizer.hpp */,
-				4E17240F2041A88100160483 /* lexer.cpp */,
-				4E1724102041A88100160483 /* lexer.hpp */,
 				4EF6A82D2038BBDF001D7FFF /* token.cpp */,
 				4EF6A82E2038BBDF001D7FFF /* token.hpp */,
 			);
@@ -156,7 +151,6 @@
 			files = (
 				4EF6A8242038BB99001D7FFF /* main.cpp in Sources */,
 				4EF6A82C2038BBB9001D7FFF /* tokenizer.cpp in Sources */,
-				4E1724112041A88100160483 /* lexer.cpp in Sources */,
 				4EF6A8352038C184001D7FFF /* exceptions.cpp in Sources */,
 				4EF6A82F2038BBDF001D7FFF /* token.cpp in Sources */,
 				4EF6A8322038BD19001D7FFF /* lily.cpp in Sources */,

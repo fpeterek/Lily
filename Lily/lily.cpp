@@ -18,9 +18,9 @@ std::vector<std::string> & Lily::files() {
     
 }
 
-std::array<char, 12> _operatorChars = { '+', '-', '*', '/', '&', '|', '>', '<', '~', '=', '!', '^' };
+std::array<char, 13> _operatorChars = { '+', '-', '*', '/', '&', '|', '>', '<', '~', '=', '!', '^', '?' };
 
-std::array<char, 12> & Lily::operatorChars() {
+std::array<char, 13> & Lily::operatorChars() {
     return _operatorChars;
 }
 
@@ -28,6 +28,20 @@ std::array<char, 9> _specialChars = { '{', '}', '(', ')', '[', ']', '.', ',', ':
 
 std::array<char, 9> & Lily::specialChars() {
     return _specialChars;
+}
+
+std::array<std::string, 5> _operators = { "and", "or", "not", "return", "in" };
+
+std::array<std::string, 5> & Lily::operators() {
+    return _operators;
+}
+
+std::array<std::string, 11> _keywords = { "function", "var", "const", "class", "if", "elif", "else", "while", "for",
+    "break", "continue"
+};
+
+std::array<std::string, 11> & Lily::keywords() {
+    return _keywords;
 }
 
 bool Lily::isImported(const std::string & filename) {

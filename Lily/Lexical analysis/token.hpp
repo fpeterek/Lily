@@ -14,16 +14,29 @@
 
 namespace Lily {
     
-    enum TokenType {
+    enum class TokenType {
       
         IntLiteral,
         FloatLiteral,
         StringLiteral,
         Operator,
         Identifier,
-        Keyword
+        Keyword,
+        
+        OpeningBracket,
+        ClosingBracket,
+        OpeningBrace,
+        ClosingBrace,
+        OpeningParen,
+        ClosingParen,
+        Colon,
+        Separator,
+        
+        None
         
     };
+    
+    std::string to_string(const TokenType t);
     
     struct token {
         
@@ -32,12 +45,14 @@ namespace Lily {
         uint32_t file;
         uint32_t line, character;
         
+        TokenType type;
+        
         token & operator=(const token & t);
         
     };
     
     std::ostream & operator<< (std::ostream & os, const token & t);
-    
+    std::ostream & operator<< (std::ostream & os, const TokenType type);
 }
 
 #endif /* token_hpp */
